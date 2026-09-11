@@ -1,52 +1,38 @@
-# Locat1on.github.io
+# Locat1on 个人主页
 
-田嘉宇（Locat1on）的个人主页 — 基于 Jekyll 的现代科技感学术主页，部署在 GitHub Pages。
+React 19 + TypeScript + Vite + Tailwind CSS 单页个人主页。支持紫黑色与提夫尼蓝白色主题。
 
-## 快速部署
+## 开发
 
-1. 在 GitHub 上创建仓库 `Locat1on.github.io`
-2. 将本项目所有文件推送到该仓库
-3. 在仓库 Settings → Pages 中选择 Source 为 `Deploy from a branch`，分支选 `main`，目录选 `/ (root)`
-4. 等待几分钟，访问 `https://locat1on.github.io` 即可看到网站
-
-## 本地预览（可选）
+使用 Node.js 22.12 或更新的 22.x 版本。
 
 ```bash
-gem install bundler
-cd Locat1on.github.io
-bundle install
-bundle exec jekyll serve
+npm ci
+npm run dev
 ```
 
-访问 `http://localhost:4000` 即可预览。
+检查：`npm run lint`；构建：`npm run build`；生产预览：`npm run preview`。
 
-## 自定义内容
+## 源码
 
-- `_config.yml` — 修改站点标题、描述、作者信息
-- `index.html` — 修改各区块的文字内容、科研经历、联系方式
-- `assets/css/style.css` — 调整颜色变量（`--accent-1`, `--accent-2` 等）可快速换色
+main 分支保存 src/、public/、配置及 package-lock.json。node_modules/ 和 dist/ 不提交。已移除 Jekyll，不再需要 Ruby。
 
-## 项目结构
+- src/App.tsx：页面编排
+- src/components/sections/：页面内容
+- src/index.css：主题和公共样式
+- public/images/avatar.jpg：照片
+- .github/workflows/deploy.yml：自动构建部署
 
-```
-Locat1on.github.io/
-├── _config.yml          # Jekyll 配置
-├── _layouts/
-│   └── default.html     # 页面布局模板
-├── assets/
-│   ├── css/style.css    # 主样式文件（现代科技感）
-│   ├── js/main.js       # 交互脚本
-│   └── favicon.svg      # 渐变色首字母图标
-├── index.html           # 主页内容（基于简历填充）
-├── Gemfile              # Ruby 依赖
-└── README.md            # 本文件
-```
+## 部署
 
-## 功能特性
+目标仓库 Locat1on/Locat1on.github.io，部署在域名根路径。
 
-- 深色科技感设计，渐变色+发光效果
-- 滚动渐入动画 + 顶部进度条
-- 移动端自适应导航
-- 响应式卡片布局（科研、实践经历）
-- SEO 标签支持
-- 纯 CSS 实现视觉效果，无需外部依赖
+首次在 Settings → Pages → Build and deployment → Source 选择 GitHub Actions。
+
+源码提交并推送到 main 后，工作流自动安装依赖、运行 Lint、构建并发布 dist/。Pull Request 只检查，不发布。支持 Actions 页面手动部署。无需 gh-pages 分支，也不提交构建产物。
+
+本地配置不会自动更改远程设置；是否上线以 Actions 实际结果为准。
+
+站点：https://locat1on.github.io/
+
+参考：https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
